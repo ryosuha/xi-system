@@ -1,6 +1,0 @@
-FROM ryosuha/nu-system:1.0
-COPY 20fa0290-be2f-4c2d-b35c-804123d1cc24 /
-
-
-CMD ["python3","/20fa0290-be2f-4c2d-b35c-804123d1cc24"]
-
