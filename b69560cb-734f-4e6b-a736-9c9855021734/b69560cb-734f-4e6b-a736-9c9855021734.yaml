@@ -1,0 +1,15 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: gpwh7896
+spec:
+  template:
+    metadata:
+      name: gpwh7896-rev1
+    spec:
+      containers:
+        - image: "registry.bokuno.pw/db5dd3dc321d"
+          ports:
+            - containerPort: 80
+      imagePullSecrets:
+        - name: myregistrykey

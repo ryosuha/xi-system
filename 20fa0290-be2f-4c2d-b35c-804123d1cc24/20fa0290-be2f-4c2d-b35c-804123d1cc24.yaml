@@ -1,0 +1,15 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: kbgo1252
+spec:
+  template:
+    metadata:
+      name: kbgo1252-rev1
+    spec:
+      containers:
+        - image: "registry.bokuno.pw/54d535e4f553"
+          ports:
+            - containerPort: 80
+      imagePullSecrets:
+        - name: myregistrykey

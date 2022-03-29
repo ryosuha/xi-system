@@ -1,0 +1,15 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: dgkw8315
+spec:
+  template:
+    metadata:
+      name: dgkw8315-rev1
+    spec:
+      containers:
+        - image: "registry.bokuno.pw/c4b7b40b8043"
+          ports:
+            - containerPort: 80
+      imagePullSecrets:
+        - name: myregistrykey

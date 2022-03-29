@@ -1,0 +1,15 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: {my_uuid.to_string()}
+spec:
+  template:
+    metadata:
+      name: {my_uuid.to_string()}-rev1
+    spec:
+      containers:
+        - image: "registry.bokuno.pw/{containerid}"
+          ports:
+            - containerPort: 80
+      imagePullSecrets:
+        - name: myregistrykey
