@@ -1,6 +1,0 @@
-FROM ryosuha/nu-system:1.0
-COPY b69560cb-734f-4e6b-a736-9c9855021734 /
-
-
-CMD ["python3","/b69560cb-734f-4e6b-a736-9c9855021734"]
-
