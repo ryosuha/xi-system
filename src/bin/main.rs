@@ -643,7 +643,9 @@ fn post_api_mu(mut _stream: TcpStream,homepath: &PathBuf,filename: &str,data: &V
     let mut timeout_flag = false;
     let secs = Duration::from_secs(MU_TIMEOUT);
     let _status_code = match runfunction.wait_timeout(secs).unwrap() {
-        Some(status) => status.code(),
+        Some(status) => {
+            status.code() 
+        },
         None => {
             timeout_flag = true;
             runfunction.kill().unwrap();
@@ -666,17 +668,24 @@ fn post_api_mu(mut _stream: TcpStream,homepath: &PathBuf,filename: &str,data: &V
     */
 
     let mut s = String::new();
+    let mut statusflag = false;
     runfunction.stdout.unwrap().read_to_string(&mut s).unwrap();
     for (num, line) in s.split("\n").enumerate() {
         println!("{}: {}", num, line);
         _stream.write(line.as_bytes());
     }
 
-    runfunction.stderr.unwrap().read_to_string(&mut s).unwrap();
-    for (num, line) in s.split("\n").enumerate() {
-        println!("{}: {}", num, line);
-        _stream.write(line.as_bytes());
+
+    //check stdout
+    //println!("{}", _status_code.unwrap().to_string());
+    if _status_code.unwrap() == 1 {
+        runfunction.stderr.unwrap().read_to_string(&mut s).unwrap();
+        for (num, line) in s.split("\n").enumerate() {
+            println!("{}: {}", num, line);
+            _stream.write(line.as_bytes());
+        }
     }
+
 
     /*
     let fileremove = Command::new("sh")
@@ -839,6 +848,8 @@ fn post_api_nu(mut _stream: TcpStream,homepath: &PathBuf,filename: &str,data: &V
     _stream.write(_response.as_bytes());
     
 
+    //TODO DELETION OF SERVICE 
+    //SHOULD BE ON DELETE API METHOD
     /*
     let fileremove = Command::new("sh")
             .arg("-c")
