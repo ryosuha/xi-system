@@ -390,6 +390,7 @@ fn handle_connection(mut stream: TcpStream,homepath: PathBuf) {
                 match resource_format {
                     "html" => _response = get_request(&homepath,&filename).into_bytes(),
                     "jpg" => _response = get_jpg_request(&homepath,&filename),
+                    "ico" => _response = get_jpg_request(&homepath,&filename),
                     "NONE" => _response = format!("NOT IMPLEMENTED").into_bytes(),
                     "UNKNOWN" => _response = format!("NOT IMPLEMENTED").into_bytes(),
                     _ => _response = format!("NOT IMPLEMENTED").into_bytes(),
@@ -619,7 +620,7 @@ fn post_api_filescan(mut _stream: TcpStream,homepath: &PathBuf,filename: &str,da
 
 fn post_api_mu(mut _stream: TcpStream,homepath: &PathBuf,filename: &str,data: &Vec<u8>) {
     let mut _response = String::new();
-    if print_debug() { println!("DEBUG 0057 retrieved data: {}", String::from_utf8_lossy(&data)); }
+    if print_debugdata() { println!("DEBUG 0057 retrieved data: {}", String::from_utf8_lossy(&data)); }
 
     //write to file
     let my_uuid = Uuid::new_v4();
